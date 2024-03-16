@@ -11,8 +11,12 @@ const Landing = () => {
         signIn('spotify')
     }
 
-    if(session.data) {
-        redirect('/home')
+    if(session) {
+        console.log(session);
+        if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('session', JSON.stringify(session.data));
+          } 
+        redirect('/home');
     }
 
     return (

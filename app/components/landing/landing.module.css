@@ -37,7 +37,6 @@
 
   .text1, .text2 {
     max-width: 465px;
-    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 64px;
@@ -52,7 +51,6 @@
 
 .text3 {
     max-width: 295px;
-    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -67,7 +65,6 @@
     text-decoration: none;
     margin-right: 1em;
     color: #FFFFFF;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .login {

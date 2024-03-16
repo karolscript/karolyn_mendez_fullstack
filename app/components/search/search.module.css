@@ -43,7 +43,6 @@
     border-radius: 24px;
 }
 
-
 .search {
     display: flex;
     align-items: center;
@@ -77,6 +76,76 @@
     color: #000000;
     cursor: pointer;
     width: 150px;
+}
+
+.resultsContainer {
+    display: inline-block;
+    max-width: 1280px;
+    width: 100%;
+}
+
+.resultsHeader {
+    text-align: left;
+    margin-top: 76px;
+}
+
+.resultsTitle {
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.results {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+
+.album {
+    max-width: 320px;
+    max-height: 401px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+}
+
+.albumImage {
+    width: 272px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.artistName {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 24px;
+    color: #FFFFFF;
+    margin-top: 16px;
+    text-align: left;
+}
+
+.paginationContainer {
+    margin-top: 59px;
+    text-align: left;
+}
+
+.pageNumber {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    margin-right: 16px;
+    background-color: transparent;
+    border: none;
+}
+
+.activePage {
+    color: #D6F379;
+}
+
+.pageNumber:hover, .activePage:hover {
+    cursor: pointer;
 }
 
 
