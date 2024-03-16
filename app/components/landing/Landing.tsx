@@ -1,8 +1,13 @@
-import Link from "next/link";
+"use client"
 import styles from "./landing.module.css";
 import { ArrowRight } from 'akar-icons';
+import { signIn } from 'next-auth/react'
 
 const Landing = () => {
+    const handleLogin = () => {
+        signIn('spotify', { callbackUrl: 'http://localhost:3000/home' })
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.landing}>
@@ -18,7 +23,7 @@ const Landing = () => {
                     <h1 className={styles.text2}>mejor música</h1>
                     <h6 className={styles.text3}>Accede a tu cuenta para escuchar tus albumes favoritos</h6>
                     <div className={styles.login}>
-                        <Link href="/login" className={styles.text4}>Login con Spotify</Link>
+                        <button className={styles.text4} onClick={handleLogin}>Login con Spotify</button>
                         <ArrowRight color="#FFFFFF"/>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <div>
             <Header />
-            <Landing />
+           HOLA HOME
         </div>
     );
 };
