@@ -1,5 +1,6 @@
 .container {
     text-align: center;
+    padding-bottom: 135px;
 }
 
 .textContainer {
@@ -80,7 +81,7 @@
 
 .resultsContainer {
     display: inline-block;
-    max-width: 1280px;
+    max-width: 85.18%;
     width: 100%;
 }
 
@@ -111,7 +112,8 @@
 }
 
 .albumImage {
-    width: 272px;
+    width: 100%;
+    max-width: 272px;
     height: auto;
     border-radius: 12px;
 }
