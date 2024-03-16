@@ -15,9 +15,11 @@ const Landing = () => {
         console.log(session);
         if (typeof localStorage !== 'undefined') {
             localStorage.setItem('session', JSON.stringify(session.data));
+            console.log('local', localStorage.getItem('session'));
           } 
         redirect('/home');
     }
+
 
     return (
         <div className={styles.container}>

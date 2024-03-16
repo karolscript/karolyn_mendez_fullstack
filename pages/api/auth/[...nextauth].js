@@ -39,4 +39,27 @@ export default NextAuth({
     },
   },
   secret: process.env.SECRET,
-})
+});
+
+async function refreshAccessToken(token) {
+  const url = `https://accounts.spotify.com/api/token`;
+  const params = new URLSearchParams();
+  params.append("grant_type", "refresh_token");
+  params.append("refresh_token", token.refreshToken);
+  params.append("client_id", spotifyClientId);
+  params.append("client_secret", spotifyClientSecret);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Authorization": `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString("base64")}`,
+    },
+    body: params,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to refresh access token");
+  }
+
+  return await response.json();
+}

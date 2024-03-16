@@ -188,43 +188,34 @@
 }
 
 @media (max-width: 390px) {
-    .landing {
-        max-height: 794px;
-        margin-top: 62px;
-        padding-left: 0;
-    }
-
-    .arrowContainer {
-        max-width: 222px;
-        max-height: 222px;
-        position: relative;
-        padding-left: 70px;
-    }
-
-    .arrow {
-        width: 100%;
-        height: auto;
+    .container {
+        padding-bottom: 123px;
     }
 
     .textContainer {
-        padding-top: 27px;
-        padding-left: 43px;
+        margin-top: 45px;
+        padding-top: 0;
+        padding-left: 31px;
+        justify-content: left;
     }
 
     .text1, .text2 {
         font-size: 40px;
-        line-height: 48.78px;
+        text-align: left;
     }
 
     .text3 {
-        margin-top: 38px;
+        margin-top: 24px;
     }
 
-    .login {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 197px;
-        margin-top: 30px;
+    .searchContainer {
+        max-width: 338px;
+        margin-top: 33px;
+        margin-left: 26px;
+        margin-right: 26px;
+    }
+
+    .resultsHeader {
+        margin-top: 45px;
     }
 }

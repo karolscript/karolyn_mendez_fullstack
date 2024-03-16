@@ -21,14 +21,9 @@ const Search = () => {
         session = JSON.parse(sessionString as string);
     }
     
-
-    console.log(session);
-
     const handleSearch = async (artist: string) => {
-        //const response = await fetch(`/api/search?query=${search}`);
-        //const data = await response.json();
+        setCurrentPage(1);
         getAlbums(artist);
-        //setResults(data);
     };
 
     const getAlbums = async (artist: string) => {
