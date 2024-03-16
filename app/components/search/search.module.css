@@ -1,0 +1,159 @@
+.container {
+    text-align: center;
+}
+
+.textContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 106px;
+}
+
+.text1, .text2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 100%;
+}
+
+.text2 {
+    color: #D6F379;
+}
+
+.text3 {
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: left;
+    color: #FFFFFF;
+    margin-top: 24px;
+    max-width: 467px;
+}
+
+.searchContainer {
+    display: inline-block;
+    max-width: 664px;
+    margin-top: 34px;
+    background: #FFFFFF;
+    width: 100%;
+    padding-right: 8px;
+    border-radius: 24px;
+}
+
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 62px;
+}
+
+.searchInput {
+    border: none;
+    padding-left: 20px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+.searchInput:focus {
+    outline: none;
+}
+
+.searchButton {
+    background: #D6F379;
+    height: 46px;
+    border-radius: 24px;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    cursor: pointer;
+    width: 150px;
+}
+
+
+@media (max-width: 834px) {
+    .landing {
+        max-width: 100%;
+        max-height: 794px;
+        width: 100%;
+        margin-top: 190px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 88px;
+    }
+
+    .arrowContainer {
+        max-width: 318px;
+        max-height: 318px;
+    }
+
+    .textContainer {  
+        align-items: flex-start;
+        padding-top: 74px;
+        padding-left: 0;
+    }
+
+    .text3 {
+        margin-top: 20px;
+    }
+
+    .login {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 197px;
+        margin-top: 106px;
+    }
+}
+
+@media (max-width: 390px) {
+    .landing {
+        max-height: 794px;
+        margin-top: 62px;
+        padding-left: 0;
+    }
+
+    .arrowContainer {
+        max-width: 222px;
+        max-height: 222px;
+        position: relative;
+        padding-left: 70px;
+    }
+
+    .arrow {
+        width: 100%;
+        height: auto;
+    }
+
+    .textContainer {
+        padding-top: 27px;
+        padding-left: 43px;
+    }
+
+    .text1, .text2 {
+        font-size: 40px;
+        line-height: 48.78px;
+    }
+
+    .text3 {
+        margin-top: 38px;
+    }
+
+    .login {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 197px;
+        margin-top: 30px;
+    }
+}
