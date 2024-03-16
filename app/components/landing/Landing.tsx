@@ -1,11 +1,18 @@
 "use client"
 import styles from "./landing.module.css";
 import { ArrowRight } from 'akar-icons';
-import { signIn } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation'
 
 const Landing = () => {
+    const session = useSession();
+    
     const handleLogin = () => {
-        signIn('spotify', { callbackUrl: 'http://localhost:3000/home' })
+        signIn('spotify')
+    }
+
+    if(session.data) {
+        redirect('/home')
     }
 
     return (
@@ -23,7 +30,7 @@ const Landing = () => {
                     <h1 className={styles.text2}>mejor música</h1>
                     <h6 className={styles.text3}>Accede a tu cuenta para escuchar tus albumes favoritos</h6>
                     <div className={styles.login}>
-                        <button className={styles.text4} onClick={handleLogin}>Login con Spotify</button>
+                        <a className={styles.text4} href="/api/auth/signin" onClick={handleLogin}>Login con Spotify</a>
                         <ArrowRight color="#FFFFFF"/>
                     </div>
                 </div>
