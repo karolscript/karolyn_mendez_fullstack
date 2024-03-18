@@ -22,7 +22,7 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
     }
 
     const getArstistAlbums = async (id: string) => {
-        const token = session?.data.accessToken;
+        const token = session?.data?.accessToken;
         const fetchedAlbums = await fetch((`https://api.spotify.com/v1/artists/${id}/albums`), {
             headers: {
                 Authorization: `Bearer ${token}`,

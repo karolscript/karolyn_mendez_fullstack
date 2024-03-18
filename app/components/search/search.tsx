@@ -147,7 +147,9 @@ const Album = ({album}: {album: any}) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }});
+                
         const data = await artistData.json();
+
         if (!data.error) {
             setArtist(data);
         } else {

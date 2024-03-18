@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import styles from "./landing.module.css";
 import { ArrowRight } from 'akar-icons';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -10,8 +10,6 @@ const Landing = () => {
     const handleLogin = () => {
         signIn('spotify')
     }
-
-    console.log('session', session);
 
     if(session.data) {
         redirect('/home');

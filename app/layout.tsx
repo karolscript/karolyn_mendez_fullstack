@@ -20,10 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={monserrat.className}>
         <div>
-          <Header />
             <main>
               <SessionWrapper>
-                {children}
+                <Header />
+                  {children}
               </SessionWrapper>
             </main>
         </div>

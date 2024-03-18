@@ -9,11 +9,16 @@ export default NextAuth({
     SpotifyProvider({
       clientId: spotifyClientId,
       clientSecret: spotifyClientSecret,
+      id: "spotify",
+      name: "Spotify",
+      type: "oauth",
+      authorization: {
+        params: {
+          scope: "user-read-email user-read-private user-library-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played user-top-read user-read-playback-position user-read-recently-played user-follow-read user-follow-modify",
+        },
+       },
       token: "https://accounts.spotify.com/api/token",
       userinfo: "https://api.spotify.com/v1/me",
-      type: "oauth",
-      authorization:
-      "https://accounts.spotify.com/authorize?scope=user-read-email, user-library-read, user-library-modify, playlist-read-private, playlist-modify-public, playlist-modify-private, user-read-playback-state, user-modify-playback-state, user-read-currently-playing, user-read-recently-played, user-top-read, user-read-playback-position, user-read-recently-played, user-follow-read, user-follow-modify",
       profile(profile) {
         return {
           id: profile.id,
@@ -35,12 +40,8 @@ export default NextAuth({
       return token;
     },
     async session({ session, token, user }) {
-      console.log("session in sess", session)
-      refreshAccessToken(token);
-      checkTokenExpired(session.expires);
       session.accessToken = token.accessToken
-      console.log("session in sess again", session)
-      return session
+      return session;
     },
   },
   secret: process.env.SECRET,
@@ -62,10 +63,9 @@ async function refreshAccessToken(token) {
     body: params,
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to refresh access token");
-  }
+  console.log("response", response);
 
+ 
   return await response.json();
 }
 
