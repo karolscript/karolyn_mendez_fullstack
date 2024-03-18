@@ -3,6 +3,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import styles from "./artist.module.css";
+import { Minus, Plus } from 'akar-icons';
 
 const ArtistDetails = ({searchParams}) => {
     const session = useSession();
@@ -99,13 +100,13 @@ const ArtistDetails = ({searchParams}) => {
                 <ul className={styles.results}>
                     {albums !== null && albums?.map((item) => (
                     <div key={item.album.id} className={styles.album}>
-                        {console.log('item', item)}
                         <img src={item.album?.images[0]?.url} alt={item.album.name} className={styles.albumImage}/>
                         <div className={styles.albumInfo}>
                             <span className={styles.albumName}>{item.album.name}</span>
                             <span className={styles.albumReleaseDate}>{`publicado: ${item.album.release_date}`}</span>
-                            <button className={styles.saveButton}>
-                            <p>{item.userHasAlbum ? 'You have this album' : 'You do not have this album'}</p>
+                            <button className={item.userHasAlbum ? styles.deleteButton : styles.saveButton}>
+                            {item.userHasAlbum ? <Minus strokeWidth={2} size={16} /> : <Plus strokeWidth={2} size={16} />}
+                            <p>{item.userHasAlbum ? 'RemoveAlbum' : 'Add album'}</p>
                             </button>
                         </div>
                     </div>

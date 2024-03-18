@@ -103,3 +103,59 @@
     font-size: 16px;
     margin-top: 24px;
 }
+
+.saveButton, .deleteButton {
+    margin-top: 24px;
+    width: 184px;
+    height: 48px;
+    border-radius: 24px;
+    background-color: #D6F379;
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.deleteButton {
+    background-color: #E3513D;
+    color: white;
+}
+
+@media (max-width: 390px) {
+    .container {
+        padding-bottom: 123px;
+        padding-left: 31px;
+        padding-right: 31px;
+    }
+
+    .artist {
+        flex-direction: column;
+        margin-top: 41px;
+    }
+
+    .artistInfo {
+        padding-left: 0px;
+        padding-top: 31px;
+    }
+
+    .circular_image {
+        max-width: 169px;
+        max-height: 168px;
+    }
+
+    .artistName {
+        font-size: 40px;
+    }
+
+    .artistFollowers {
+        margin-top: 61px;
+        margin-bottom: 8px;
+    }
+
+    .album {
+       padding-bottom: 49px;
+    }    
+}
