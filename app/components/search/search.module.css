@@ -245,11 +245,19 @@
         margin-right: 0px;
     }
 
+    .results {
+        justify-content: center;
+    }
+
     .resultsHeader {
         margin-top: 45px;
     }
 
     .artistName {
         line-height: 44px;
+    }
+
+    .albumImage {
+        min-width: 272px;
     }
 }

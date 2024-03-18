@@ -23,6 +23,10 @@
     text-decoration: none;
 }
 
+.divider {
+    padding-left: 16px;
+}
+
 .signOutIcon {
     display: none;
 }

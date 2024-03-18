@@ -1,8 +1,10 @@
 .container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding-left: 116px;
     padding-right: 116px;
-    padding-bottom: 135px;
 }
 
 .textContainer {
@@ -34,4 +36,169 @@
     color: #FFFFFF;
     margin-top: 24px;
     max-width: 467px;
+}
+
+.resultsContainer {
+    display: inline-block;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.results {
+    display: flex;
+    align-items: flex-start;
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+
+.album {
+    max-width: 320px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+}
+
+.albumImage {
+    width: 272px;
+    height: 241px;
+    border-radius: 12px;
+}
+
+.albumName {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.albumInfo {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.albumReleaseDate {
+    font-size: 16px;
+    margin-top: 24px;
+}
+
+.deleteButton {
+    margin-top: 24px;
+    width: 184px;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #E3513D;
+    color: white;
+}
+
+.onlyAlbums {
+    display: block;
+}
+
+.albumsByArtist {
+    display: none;
+}
+
+@media (max-width: 834px) {
+    .container {
+        padding-left: 100px;
+        padding-right: 100px;
+        margin-top: 84px;
+    }
+
+    .textContainer {  
+        padding-top: 0;
+        margin-top: 0;
+        padding-left: 0;
+    }
+
+    .text3 {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .resultsContainer {
+        margin-top: 32px;
+    }
+
+    .album {
+        padding-left: 0px;
+        padding-right: 0px;
+        max-width: 300px;
+    }
+
+    .albumImage {
+        width: 32.614vw;
+        height: auto;
+    }
+    
+    .onlyAlbums {
+        display: none;
+    }
+    
+    .albumsByArtist {
+        display: block;
+    }
+
+    .artistName {
+        font-size: 32px;
+        line-height: 44px;
+        font-weight: 700;
+        color: #FFFFFF;
+        text-align: left;
+        margin-top: 52px;
+    
+    }
+}
+
+@media (max-width: 475px) {
+    .container {
+        padding-bottom: 123px;
+        padding-left: 31px;
+        padding-right: 31px;
+    }
+
+    .textContainer {
+        margin-top: 45px;
+        padding-top: 0;
+        justify-content: left;
+        
+    }
+
+    .text1, .text2 {
+        font-size: 40px;
+        text-align: left;
+    }
+
+    .text3 {
+        margin-top: 24px;
+        text-align: left;
+    }
+
+    .searchContainer {
+        margin-top: 33px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .results {
+        justify-content: center;
+    }
+
+    .albumImage {
+        min-width: 272px;
+    }
+
+    .album {
+       padding-bottom: 49px;
+    }
+        
 }

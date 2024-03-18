@@ -6,7 +6,6 @@ import { signOut, useSession } from 'next-auth/react';
 
 const Header = () => {
     const session = useSession();
-    console.log(session)
 
     const handleSignOut = () => {
           signOut({ callbackUrl: '/' });
@@ -22,7 +21,6 @@ const Header = () => {
             </div>
             {session?.status === "authenticated" && <div className={styles.navigation}>
                 <a href="/home" className={styles.signupButton}>Buscar</a>
-                <span className={styles.divider}>|</span>
                 <a href="/my-albums" className={styles.myAlbums}>My albums</a>
                 <span className={styles.divider}>|</span>
                 <a href="/api/auth/signout" className={styles.loginButton} onClick={handleSignOut}>
