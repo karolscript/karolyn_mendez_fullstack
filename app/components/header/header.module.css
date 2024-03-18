@@ -11,7 +11,7 @@
 }
 
 
-@media (max-width: 390px) {
+@media (max-width: 475px) {
     .header {
         padding-left: 24px;
     }

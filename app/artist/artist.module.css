@@ -77,10 +77,8 @@
 }
 
 .albumImage {
-    width: 100%;
-    max-width: 272px;
-    max-height: 241px;
-    height: auto;
+    width: 272px;
+    height: 241px;
     border-radius: 12px;
 }
 
@@ -124,16 +122,15 @@
     color: white;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 834px) {
     .container {
-        padding-bottom: 123px;
-        padding-left: 31px;
-        padding-right: 31px;
+        padding-left: 100px;
+        padding-right: 100px;
     }
 
     .artist {
         flex-direction: column;
-        margin-top: 41px;
+        margin-top: 23px;
     }
 
     .artistInfo {
@@ -157,5 +154,44 @@
 
     .album {
        padding-bottom: 49px;
-    }    
+       width: 334px;
+    }   
+}
+
+@media (max-width: 475px) {
+    .container {
+        padding-bottom: 123px;
+        padding-left: 31px;
+        padding-right: 31px;
+    }
+
+    .artist {
+        flex-direction: column;
+        margin-top: 41px;
+        padding-bottom: 24px;
+    }
+
+    .artistInfo {
+        padding-left: 0px;
+        padding-top: 31px;
+    }
+
+    .circular_image {
+        max-width: 169px;
+        max-height: 168px;
+    }
+
+    .artistName {
+        font-size: 40px;
+    }
+
+    .artistFollowers {
+        margin-top: 61px;
+        margin-bottom: 8px;
+    }
+
+    .album {
+       padding-bottom: 49px;
+    }
+        
 }

@@ -137,7 +137,7 @@ const Search = () => {
 
 export default Search;
 
-const Album = ({album}) => {
+const Album = ({album}: {album: any}) => {
     const [artist, setArtist] = useState(null);
     const session = useSession();
 
@@ -150,7 +150,12 @@ const Album = ({album}) => {
         const data = await artistData.json();
         if (!data.error) {
             setArtist(data);
-        } 
+        } else {
+            console.error(data.error);
+            if (data.error.status === 401) {
+                signIn('spotify');
+            }
+        }
     }
 
     useEffect(() => {

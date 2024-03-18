@@ -1,11 +1,15 @@
 "use client";
-import { signIn, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import styles from "./artist.module.css";
 import { Minus, Plus } from 'akar-icons';
 
-const ArtistDetails = ({searchParams}) => {
+type SearchParams = {
+    artist: string;
+}
+
+const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
     const session = useSession();
     let { artist } = searchParams;
     artist = JSON.parse(artist);
@@ -18,17 +22,17 @@ const ArtistDetails = ({searchParams}) => {
     }
 
     const getArstistAlbums = async (id: string) => {
-        const token = session?.data?.accessToken;
+        const token = session?.data.accessToken;
         const fetchedAlbums = await fetch((`https://api.spotify.com/v1/artists/${id}/albums`), {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
         const resData = await fetchedAlbums.json();
         const data = resData.items;
 
-        const albums = await Promise.all(data.map(async (album) => {
+        const albums = await Promise.all(data.map(async (album: { id: string }) => {
             const response = await fetch((`https://api.spotify.com/v1/me/albums/contains?ids=${album.id}`),
              {
                 headers: {
@@ -76,7 +80,7 @@ const ArtistDetails = ({searchParams}) => {
     }
 
     useEffect(() => {
-        getArstistAlbums(artist.id);
+        getArstistAlbums(artist?.id);
     }
     , [artist?.id, session?.data]);
 

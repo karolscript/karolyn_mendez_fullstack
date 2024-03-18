@@ -113,7 +113,7 @@
 }
 
 .albumImage {
-    width: 272px;
+    width: 17.989vw;
     height: auto;
     border-radius: 12px;
 }
@@ -183,13 +183,23 @@
     }
 
     .textContainer {  
-        align-items: flex-start;
         padding-top: 74px;
         padding-left: 0;
     }
 
     .text3 {
         margin-top: 20px;
+        text-align: center;
+    }
+
+    .album {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .albumImage {
+        width: 32.614vw;
+        height: auto;
     }
 
     .login {
@@ -201,7 +211,7 @@
     }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 475px) {
     .container {
         padding-bottom: 123px;
         padding-left: 31px;
@@ -216,6 +226,7 @@
         margin-top: 45px;
         padding-top: 0;
         justify-content: left;
+        
     }
 
     .text1, .text2 {
@@ -225,10 +236,10 @@
 
     .text3 {
         margin-top: 24px;
+        text-align: left;
     }
 
     .searchContainer {
-        max-width: 338px;
         margin-top: 33px;
         margin-left: 0px;
         margin-right: 0px;
