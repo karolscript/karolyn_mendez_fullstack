@@ -1,0 +1,105 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 116px;
+    padding-right: 116px;
+}
+
+.artist {
+    display: flex;
+    justify-content: left;
+    margin-top: 65px;
+    width: 100%;
+}
+
+.circular_image {
+    width: 237px;
+    height: 237px;
+    border-radius: 50%;
+    overflow: hidden;
+    display:inline-block;
+    vertical-align:middle;
+  }
+
+  .circular_image img{
+    width:100%;
+  }
+
+  .artistInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 59px;
+    padding-top: 31px;
+}
+
+.resultsContainer {
+    display: inline-block;
+    width: 100%;
+}
+
+.resultsHeader {
+    text-align: left;
+    margin-top: 76px;
+}
+
+.resultsTitle {
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.results {
+    display: flex;
+    align-items: flex-start;
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+
+.artistName {
+    font-size: 64px;
+    font-weight: 700;
+}
+
+.artistFollowers {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 32px;
+}
+
+.album {
+    max-width: 320px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+}
+
+.albumImage {
+    width: 100%;
+    max-width: 272px;
+    max-height: 241px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.albumInfo {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.albumName {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.albumReleaseDate {
+    font-size: 16px;
+    margin-top: 24px;
+}

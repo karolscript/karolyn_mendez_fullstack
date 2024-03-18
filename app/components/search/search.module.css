@@ -1,5 +1,7 @@
 .container {
     text-align: center;
+    padding-left: 116px;
+    padding-right: 116px;
     padding-bottom: 135px;
 }
 
@@ -81,7 +83,6 @@
 
 .resultsContainer {
     display: inline-block;
-    max-width: 85.18%;
     width: 100%;
 }
 
@@ -112,10 +113,16 @@
 }
 
 .albumImage {
-    width: 100%;
-    max-width: 272px;
+    width: 272px;
     height: auto;
     border-radius: 12px;
+}
+
+.albumInfo {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .artistName {
@@ -123,7 +130,15 @@
     font-size: 36px;
     line-height: 24px;
     color: #FFFFFF;
-    margin-top: 16px;
+    text-align: left;
+}
+
+.followers {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    margin-top: 24px;
     text-align: left;
 }
 
@@ -149,7 +164,6 @@
 .pageNumber:hover, .activePage:hover {
     cursor: pointer;
 }
-
 
 @media (max-width: 834px) {
     .landing {
@@ -190,12 +204,17 @@
 @media (max-width: 390px) {
     .container {
         padding-bottom: 123px;
+        padding-left: 31px;
+        padding-right: 31px;
+    }
+
+    .album {
+        max-height: max-content;
     }
 
     .textContainer {
         margin-top: 45px;
         padding-top: 0;
-        padding-left: 31px;
         justify-content: left;
     }
 
@@ -211,11 +230,15 @@
     .searchContainer {
         max-width: 338px;
         margin-top: 33px;
-        margin-left: 26px;
-        margin-right: 26px;
+        margin-left: 0px;
+        margin-right: 0px;
     }
 
     .resultsHeader {
         margin-top: 45px;
+    }
+
+    .artistName {
+        line-height: 44px;
     }
 }

@@ -1,19 +1,20 @@
 import NextAuth from 'next-auth'
 import SpotifyProvider from 'next-auth/providers/spotify'
 
+const spotifyClientId = "2f9ddd1a533a4a0791c6047ec02f13bb";
+const spotifyClientSecret = "e6262fe13f6d43bcb65acf88ab3663d0";
+
 export default NextAuth({
   providers: [
     SpotifyProvider({
-      clientId: "2f9ddd1a533a4a0791c6047ec02f13bb",
-      clientSecret: "e6262fe13f6d43bcb65acf88ab3663d0",
-      scope: ["user-read-email", "user-read-private", "user-library-read", "user-library-modify", "playlist-read-private", "playlist-modify-public", "playlist-modify-private", "user-read-playback-state", "user-modify-playback-state", "user-read-currently-playing", "user-read-recently-played", "user-top-read", "user-read-playback-position", "user-read-recently-played", "user-follow-read", "user-follow-modify"],
+      clientId: spotifyClientId,
+      clientSecret: spotifyClientSecret,
       token: "https://accounts.spotify.com/api/token",
       userinfo: "https://api.spotify.com/v1/me",
       type: "oauth",
       authorization:
-      "https://accounts.spotify.com/authorize?scope=user-read-email",
+      "https://accounts.spotify.com/authorize?scope=user-read-email, user-library-read, user-library-modify, playlist-read-private, playlist-modify-public, playlist-modify-private, user-read-playback-state, user-modify-playback-state, user-read-currently-playing, user-read-recently-played, user-top-read, user-read-playback-position, user-read-recently-played, user-follow-read, user-follow-modify",
       profile(profile) {
-        console.log("profile", profile)
         return {
           id: profile.id,
           name: profile.display_name,
@@ -29,12 +30,16 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
       if (account) {
-        token.accessToken = account.access_token
+        token.accessToken = account.access_token;
       }
-      return token
+      return token;
     },
     async session({ session, token, user }) {
+      console.log("session in sess", session)
+      refreshAccessToken(token);
+      checkTokenExpired(session.expires);
       session.accessToken = token.accessToken
+      console.log("session in sess again", session)
       return session
     },
   },
@@ -62,4 +67,12 @@ async function refreshAccessToken(token) {
   }
 
   return await response.json();
+}
+
+const checkTokenExpired = (date) => {
+  const tokenExpiryDate = new Date(date);
+  const currentTime = new Date(Date.now());
+  console.log("tokenExpiryDate", tokenExpiryDate)
+  console.log("currentTime", currentTime)
+  return tokenExpiryDate < currentTime;
 }

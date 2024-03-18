@@ -2,7 +2,7 @@
 import styles from "./landing.module.css";
 import { ArrowRight } from 'akar-icons';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation';
 
 const Landing = () => {
     const session = useSession();
@@ -11,15 +11,11 @@ const Landing = () => {
         signIn('spotify')
     }
 
-    if(session) {
-        console.log(session);
-        if (typeof localStorage !== 'undefined') {
-            localStorage.setItem('session', JSON.stringify(session.data));
-            console.log('local', localStorage.getItem('session'));
-          } 
+    console.log('session', session);
+
+    if(session.data) {
         redirect('/home');
     }
-
 
     return (
         <div className={styles.container}>
