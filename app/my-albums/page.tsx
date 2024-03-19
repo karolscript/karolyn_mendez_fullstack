@@ -11,7 +11,6 @@ const MyAlbums = () => {
     const [albumsByArtist, setAlbumsByArtist] = useState({});
 
     if(session) {
-        console.log(session)
     } else {
         redirect('/');
     }
@@ -50,13 +49,16 @@ const MyAlbums = () => {
     const handleRemoveAlbum = async (id: string) => {
         const token = session?.data?.accessToken;
 
-        const response = await fetch((`https://api.spotify.com/v1/me/albums`), {
+        const response = await fetch((`https://api.spotify.com/v1/me/albums?ids=${id}`), {
+            method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${token}`,
             }
         });
 
-        const data = await response.json();
+        if (response.ok){
+            savedAlbums();
+        }
     }
 
     useEffect(() => {
@@ -69,11 +71,11 @@ const MyAlbums = () => {
             <ul className={styles.results}>
                 {albums !== null && albums?.map((item: { album: { id: Key | null | undefined; images: { url: string | undefined; }[] | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<AwaitedReactNode> | null | undefined; release_date: any; }; }) => (
                 <div key={item.album.id} className={styles.album}>
-                    {item.album?.images !== undefined && <img src={item.album?.images[0]?.url} alt={item.album.name} className={styles.albumImage}/>}
+                    {item.album?.images !== undefined && <img src={item.album?.images[0]?.url} alt={item.album.name as string} className={styles.albumImage}/>}
                     <div className={styles.albumInfo}>
                         <span className={styles.albumName}>{item.album.name}</span>
                         <span className={styles.albumReleaseDate}>{`publicado: ${item.album.release_date}`}</span>
-                        <button className={styles.deleteButton}>
+                        <button className={styles.deleteButton} onClick={() => handleRemoveAlbum(item.album.id as string)}>
                             <Minus strokeWidth={2} size={16} />
                             <p>RemoveAlbum</p>
                         </button>

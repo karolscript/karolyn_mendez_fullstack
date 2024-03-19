@@ -1,14 +1,14 @@
 "use client";
 import styles from "./landing.module.css";
 import { ArrowRight } from 'akar-icons';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
 const Landing = () => {
     const session = useSession();
     
     const handleLogin = () => {
-        signIn('spotify')
+        signIn('spotify');
     }
 
     if(session.data) {

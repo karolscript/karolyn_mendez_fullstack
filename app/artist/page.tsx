@@ -66,23 +66,40 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
         }
     }
 
-    const saveAlbum = async (id: string) => {
-        const token = session?.data?.accessToken;
-        const artistData = await fetch((`https://api.spotify.com/v1/me/albums?ids=${id}`), {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }});
-        const data = await artistData.json();
-
-        if (!data.error) {
-            setAlbums(data);
-        }
-    }
-
     useEffect(() => {
         getArstistAlbums(artist?.id);
     }
     , [artist?.id, session?.data]);
+
+    const handleAddAlbum = async (id: string) => {
+        const token = session?.data?.accessToken;
+
+        const response = await fetch((`https://api.spotify.com/v1/me/albums?ids=${id}`), {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
+        if (response.ok){
+            getArstistAlbums(artist?.id);
+        }
+    }
+
+    const handleRemoveAlbum = async (id: string) => {
+        const token = session?.data?.accessToken;
+
+        const response = await fetch((`https://api.spotify.com/v1/me/albums?ids=${id}`), {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
+        if (response.ok){
+            getArstistAlbums(artist?.id);
+        }
+    }
 
     return (
     <>
@@ -108,7 +125,9 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
                         <div className={styles.albumInfo}>
                             <span className={styles.albumName}>{item.album.name}</span>
                             <span className={styles.albumReleaseDate}>{`publicado: ${item.album.release_date}`}</span>
-                            <button className={item.userHasAlbum ? styles.deleteButton : styles.saveButton}>
+                            <button 
+                            className={item.userHasAlbum ? styles.deleteButton : styles.saveButton} 
+                            onClick={() =>item.userHasAlbum ? handleRemoveAlbum(item.album.id) : handleAddAlbum(item.album.id)}>
                             {item.userHasAlbum ? <Minus strokeWidth={2} size={16} /> : <Plus strokeWidth={2} size={16} />}
                             <p>{item.userHasAlbum ? 'RemoveAlbum' : 'Add album'}</p>
                             </button>
