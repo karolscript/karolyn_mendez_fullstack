@@ -5,6 +5,8 @@ const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
 const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const nextAuthSecret = process.env.NEXT_AUTH_SECRET;
 
+console.log(nextAuthSecret)
+
 export default NextAuth({
   secret: nextAuthSecret,
   providers: [
