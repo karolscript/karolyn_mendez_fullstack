@@ -11,7 +11,9 @@ const Landing = () => {
         signIn('spotify');
     }
 
+    console.log(session);
     if(session.data) {
+        console.log(session.data);
         redirect('/home');
     }
 
