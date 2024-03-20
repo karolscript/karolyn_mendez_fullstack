@@ -61,12 +61,14 @@
 .artistName {
     font-size: 64px;
     font-weight: 700;
+    color: #FFFFFF;
 }
 
 .artistFollowers {
     font-size: 16px;
     font-weight: 400;
     margin-top: 32px;
+    color: #FFFFFF;
 }
 
 .album {
@@ -100,6 +102,7 @@
 .albumReleaseDate {
     font-size: 16px;
     margin-top: 24px;
+    color: #FFFFFF;
 }
 
 .saveButton, .deleteButton {
