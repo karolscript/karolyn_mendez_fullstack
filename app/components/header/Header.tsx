@@ -13,6 +13,10 @@ const Header = () => {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const [online, setOnline] = useState(typeof window !== 'undefined' ? navigator.onLine : false);
+    const [activePath, setActivePath] = useState(typeof window !== 'undefined' ? window.location.pathname : "");
+
+    //check locaion with the window prop and update the classnames
+
 
     const handleSignOut = () => {
       signOut({ callbackUrl: '/' });
@@ -37,6 +41,18 @@ const Header = () => {
         }
       }, [online]);
 
+      useEffect(() => {
+        const onLocationChange = () => {
+          setActivePath(window.location.pathname);
+        };
+    
+        window.addEventListener('popstate', onLocationChange);
+    
+        return () => {
+          window.removeEventListener('popstate', onLocationChange);
+        };
+      }, []);
+
     return (
         <div className={styles.header}>
             <div className={styles.logo}>
@@ -46,8 +62,8 @@ const Header = () => {
                 <Image className={styles.img} src="/svg/iso.svg" alt="Logo" width={133} height={24} priority />
             </div>
             {session?.status === "authenticated" ? <div className={styles.navigation}>
-                <a href="/home" className={pathname === "/home" ? styles.active : ""}>Buscar</a>
-                <a href="/my-albums" className={pathname === "/my-albums" ? styles.active : ""}>My albums</a>
+                <a href="/home" className={pathname === "/home" || activePath === '/home' ? styles.active : ""}>Buscar</a>
+                <a href="/my-albums" className={pathname === "/my-albums" || activePath === '/my-albums' ? styles.active : ""}>My albums</a>
                 <span className={styles.divider}>|</span>
                 <a href="/api/auth/signout" onClick={handleSignOut}>
                     <SignOut strokeWidth={2} size={16} className={styles.signOutIcon} />
