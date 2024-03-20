@@ -78,3 +78,14 @@ export const handleRemoveAlbumAPI= async (id: string) => {
 
     return response;
 }
+
+export const getSavedAlbumsAPI = async () => {
+    const session: CustomSession | null= await getSession();
+
+    const response = await fetch((`https://api.spotify.com/v1/me/albums`), {
+            headers: {
+                Authorization: `Bearer ${session?.user?.accessToken}`,
+            }
+        });
+    return response;
+}

@@ -1,14 +1,16 @@
 "use client";
 import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, useEffect, useState } from "react";
 import styles from "./myalbums.module.css";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { Minus } from "akar-icons";
 import { redirect } from "next/navigation";
+import { getSavedAlbumsAPI, handleRemoveAlbumAPI } from "../../pages/api/search/api";
+import { SavedAlbum, SavedAlbumByArtist } from "../types/types";
 
 const MyAlbums = () => {
     const session = useSession();
     const [albums, setAlbums] = useState([]);
-    const [albumsByArtist, setAlbumsByArtist] = useState({});
+    const [albumsByArtist, setAlbumsByArtist] = useState<SavedAlbumByArtist>();
 
     if(session) {
     } else {
@@ -16,15 +18,8 @@ const MyAlbums = () => {
     }
 
     const savedAlbums = async () => {
-        const token = session?.data?.accessToken;
-
-        const response = await fetch((`https://api.spotify.com/v1/me/albums`), {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        });
-
-        const data = await response.json();
+        const savedAlbumsResponse = await getSavedAlbumsAPI();
+        const data = await savedAlbumsResponse.json();
 
         const albumsByArtist = data?.items?.reduce((acc: { [x: string]: any[]; }, album: { album: { artists: { name: any; }[]; }; }) => {
             const artistName = album.album.artists[0].name;
@@ -47,31 +42,23 @@ const MyAlbums = () => {
     }
 
     const handleRemoveAlbum = async (id: string) => {
-        const token = session?.data?.accessToken;
+        const removeAlbumResponse = await handleRemoveAlbumAPI(id);
 
-        const response = await fetch((`https://api.spotify.com/v1/me/albums?ids=${id}`), {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        });
-
-        if (response.ok){
+        if (removeAlbumResponse.ok){
             savedAlbums();
         }
     }
 
     useEffect(() => {
-        console.log(session)
         session?.data !== undefined && savedAlbums();
     }, [session?.data]);
 
-    const renderAlbums = (albums: any[] | null) => {
+    const renderAlbums = (albums: SavedAlbum[]) => {
         return(
             <ul className={styles.results}>
-                {albums !== null && albums?.map((item: { album: { id: Key | null | undefined; images: { url: string | undefined; }[] | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<AwaitedReactNode> | null | undefined; release_date: any; }; }) => (
+                {albums !== null && albums?.map((item) => (
                 <div key={item.album.id} className={styles.album}>
-                    {item.album?.images !== undefined && <img src={item.album?.images[0]?.url} alt={item.album.name as string} className={styles.albumImage}/>}
+                    {item.album?.images !== undefined && <img src={item?.album?.images?.[0]?.url ?? ""} alt={item.album.name as string} className={styles.albumImage}/>}
                     <div className={styles.albumInfo}>
                         <span className={styles.albumName}>{item.album.name}</span>
                         <span className={styles.albumReleaseDate}>{`publicado: ${item.album.release_date}`}</span>
@@ -89,7 +76,7 @@ const MyAlbums = () => {
     const renderAlbumsByArtist = () => {
         return (
             <ul className={styles.results}>
-                {Object.keys(albumsByArtist).map((artist) => (
+                {albumsByArtist && Object.keys(albumsByArtist).map((artist) => (
                     <div key={artist}>
                         <h2 className={styles.artistName}>{artist}</h2>
                         {renderAlbums(albumsByArtist[artist])}

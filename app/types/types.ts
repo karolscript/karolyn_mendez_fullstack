@@ -48,4 +48,12 @@ export interface Track {
     duration_ms: number;
     preview_url: string;
 }
-  
+
+export interface SavedAlbumByArtist {
+    [key: string]: SavedAlbum[];
+}
+
+export interface SavedAlbum {
+    added_at: string;
+    album: Album;
+}
