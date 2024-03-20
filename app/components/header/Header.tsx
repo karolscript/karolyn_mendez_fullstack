@@ -12,7 +12,7 @@ const Header = () => {
     const session = useSession();
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
-    const [online, setOnline] = useState(navigator.onLine);
+    const [online, setOnline] = useState(typeof window !== 'undefined' ? navigator.onLine : false);
 
     const handleSignOut = () => {
       signOut({ callbackUrl: '/' });
