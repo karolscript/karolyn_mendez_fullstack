@@ -3,7 +3,7 @@ import SpotifyProvider from 'next-auth/providers/spotify'
 
 const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
 const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-const nextAuthSecret = process.env.NEXT_AUTH_SECRET;
+const nextAuthSecret = process.env.NEXT_PUBLIC_AUTH_SECRET;
 
 console.log(nextAuthSecret)
 
