@@ -3,15 +3,14 @@ import SpotifyProvider from 'next-auth/providers/spotify'
 
 const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
 const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
-console.log("spotifyClientId", spotifyClientId)
-console.log("spotifyClientSecret", spotifyClientSecret)
+const nextAuthSecret = process.env.NEXTAUTH_SECRET;
 
 export default NextAuth({
   providers: [
     SpotifyProvider({
       clientId: spotifyClientId,
       clientSecret: spotifyClientSecret,
+      secret: nextAuthSecret,
       id: "spotify",
       name: "Spotify",
       type: "oauth",
