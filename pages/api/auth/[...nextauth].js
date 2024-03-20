@@ -8,7 +8,6 @@ const nextAuthSecret = process.env.NEXT_PUBLIC_AUTH_SECRET;
 console.log(nextAuthSecret)
 
 export default NextAuth({
-  secret: nextAuthSecret,
   providers: [
     SpotifyProvider({
       clientId: spotifyClientId,
@@ -50,7 +49,7 @@ export default NextAuth({
       return session;
     },
   },
-  secret: process.env.SECRET,
+  secret: nextAuthSecret,
 });
 
 async function refreshAccessToken(token) {
