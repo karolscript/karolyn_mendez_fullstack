@@ -165,7 +165,7 @@ const Album = ({album}: {album: any}) => {
                     href={{
                         pathname: '/artist/',
                         query: {
-                            artist: JSON.stringify(artist),
+                            artistData: JSON.stringify(artist),
                         }
                     }}
                     >

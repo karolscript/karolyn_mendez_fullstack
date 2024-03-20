@@ -4,18 +4,25 @@ import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import styles from "./artist.module.css";
 import { Minus, Plus } from 'akar-icons';
+import { getArstistAlbumsAPI, handleAddAlbumAPI, handleRemoveAlbumAPI } from '../../pages/api/search/search';
+import { Album, Artist } from '../types/types';
 
 type SearchParams = {
-    artist: string;
+    artistData: string;
+}
+
+type AlbumWithUser = {
+    album: Album;
+    userHasAlbum: boolean;
 }
 
 const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
     const session = useSession();
-    let { artist } = searchParams;
-    artist = JSON.parse(artist);
+    let { artistData } = searchParams;
+    const artist: Artist = JSON.parse(artistData);
     const [monthlyListeners, setMonthlyListeners] = useState("");
-    const [albums, setAlbums] = useState([]);
-    const accessToken = session.data?.user?.accessToken;
+    const [albums, setAlbums] = useState<AlbumWithUser[]>();
+    const artistImage = artist?.images?.[0]?.url ?? "";
 
     if(session) {
     } else {
@@ -23,29 +30,8 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
     }
 
     const getArstistAlbums = async (id: string) => {
-        const token = session?.data?.accessToken;
-        const fetchedAlbums = await fetch((`https://api.spotify.com/v1/artists/${id}/albums`), {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        });
-
-        const resData = await fetchedAlbums.json();
-        const data = resData.items;
-
-        const albums = await Promise.all(data.map(async (album: { id: string }) => {
-            const response = await fetch((`https://api.spotify.com/v1/me/albums/contains?ids=${album.id}`),
-             {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            const albumData = await response.json();
-    
-            return {album, userHasAlbum: albumData[0]};
-          }));
-
-        setAlbums(albums);
+        const artistAlbums = await getArstistAlbumsAPI(id);
+        setAlbums(artistAlbums);
     }
 
     const getMonthlyListeners = async (id: string) => {
@@ -73,31 +59,17 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
     , [artist?.id, session?.data]);
 
     const handleAddAlbum = async (id: string) => {
-        const token = session?.data?.accessToken;
+        const addAlbumResponse = await handleAddAlbumAPI(id);
 
-        const response = await fetch((`https://api.spotify.com/v1/me/albums?ids=${id}`), {
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        });
-
-        if (response.ok){
+        if (addAlbumResponse.ok){
             getArstistAlbums(artist?.id);
         }
     }
 
     const handleRemoveAlbum = async (id: string) => {
-        const token = session?.data?.accessToken;
+        const removeAlbumRespose = await handleRemoveAlbumAPI(id);
 
-        const response = await fetch((`https://api.spotify.com/v1/me/albums?ids=${id}`), {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        });
-
-        if (response.ok){
+        if (removeAlbumRespose.ok){
             getArstistAlbums(artist?.id);
         }
     }
@@ -107,7 +79,7 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
         {artist !== null && <div className={styles.container}>
             <div className={styles.artist}>
                 <div className={styles.circular_image}>
-                    <img src={artist?.images[0]?.url} alt="Artist" className={styles.artistImage}/>
+                    <img src={artistImage} alt="Artist" className={styles.artistImage}/>
                 </div>
                 <div className={styles.artistInfo}>
                     <h1 className={styles.artistName}>{artist?.name}</h1>
@@ -122,7 +94,7 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
                 <ul className={styles.results}>
                     {albums !== null && albums?.map((item) => (
                     <div key={item.album.id} className={styles.album}>
-                        <img src={item.album?.images[0]?.url} alt={item.album.name} className={styles.albumImage}/>
+                        <img src={item?.album?.images?.[0]?.url ?? ""} alt={item.album.name} className={styles.albumImage}/>
                         <div className={styles.albumInfo}>
                             <span className={styles.albumName}>{item.album.name}</span>
                             <span className={styles.albumReleaseDate}>{`publicado: ${item.album.release_date}`}</span>
