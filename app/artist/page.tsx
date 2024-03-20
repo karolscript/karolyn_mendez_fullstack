@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import styles from "./artist.module.css";
 import { Minus, Plus } from 'akar-icons';
-import { getArstistAlbumsAPI, handleAddAlbumAPI, handleRemoveAlbumAPI } from '../../pages/api/search/search';
+import { getArstistAlbumsAPI, handleAddAlbumAPI, handleRemoveAlbumAPI } from '../../pages/api/search/api';
 import { Album, Artist } from '../types/types';
 
 type SearchParams = {

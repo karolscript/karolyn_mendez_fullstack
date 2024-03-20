@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAlbumsAPI, getArtistDataAPI } from "../../../pages/api/search/search";
+import { getAlbumsAPI, getArtistDataAPI } from "../../../pages/api/search/api";
 import styles from "./search.module.css";
 import { signIn, useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
