@@ -1,8 +1,8 @@
 import NextAuth from 'next-auth'
 import SpotifyProvider from 'next-auth/providers/spotify'
 
-const spotifyClientId = "2f9ddd1a533a4a0791c6047ec02f13bb";
-const spotifyClientSecret = "e6262fe13f6d43bcb65acf88ab3663d0";
+const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
+const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
 export default NextAuth({
   providers: [
@@ -33,14 +33,16 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, account }) {
       if (account) {
+        token.id = account.id;
+        token.expires_at = account.expires_at;
         token.accessToken = account.access_token;
       }
       return token;
     },
-    async session({ session, token, user }) {
-      session.accessToken = token.accessToken
+    async session({ session, token }) {
+      session.user = token;
       return session;
     },
   },
@@ -62,9 +64,6 @@ async function refreshAccessToken(token) {
     },
     body: params,
   });
-
-  console.log("response", response);
-
  
   return await response.json();
 }

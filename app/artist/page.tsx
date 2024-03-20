@@ -15,6 +15,7 @@ const ArtistDetails = ({searchParams}: {searchParams: SearchParams})  => {
     artist = JSON.parse(artist);
     const [monthlyListeners, setMonthlyListeners] = useState("");
     const [albums, setAlbums] = useState([]);
+    const accessToken = session.data?.user?.accessToken;
 
     if(session) {
     } else {

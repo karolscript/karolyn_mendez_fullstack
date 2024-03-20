@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getAlbumsAPI, getArtistDataAPI } from "../../../pages/api/search/search";
 import styles from "./search.module.css";
 import { signIn, useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import Link from "next/link";
+import { Artist } from "../../types/types";
 
-interface SearchResult {
+type SearchResult = {
     albums: {
         items: {
             id: string;
@@ -15,7 +17,8 @@ interface SearchResult {
             artists: { name: string; id: string }[];
         }[];
     }; 
-  }
+}
+
 
 const Search = () => {
     const session = useSession();
@@ -27,6 +30,8 @@ const Search = () => {
     const totalPages = Math.ceil(resultsSize / pageSize) || 0;
     
     if(session) {
+        console.log(session?.data?.user);
+        console.log(session?.data);
     } else {
         redirect('/');
     }
@@ -37,15 +42,8 @@ const Search = () => {
     };
 
     const getAlbums = async (artist: string) => {
-        const artistData = await fetch('https://api.spotify.com/v1/search?' + new URLSearchParams({
-            q: artist,
-            type: 'album',
-        }), {
-                headers: {
-                    Authorization: `Bearer ${session?.data.accessToken}`,
-            }});
-        const data = await artistData.json();
-        setResults(data);
+        const artistData = await getAlbumsAPI(artist);
+        setResults(artistData);
     }
 
     const getCurrentPageItems = () => {
@@ -125,7 +123,7 @@ const Search = () => {
                 </div>
                 <ul className={styles.results}>
                     {currentItems?.map((album) => (
-                        <Album album={album} key={album.id} session={session} />
+                        <Album album={album} key={album.id} />
                     ))}
                     
                 </ul>
@@ -138,23 +136,17 @@ const Search = () => {
 export default Search;
 
 const Album = ({album}: {album: any}) => {
-    const [artist, setArtist] = useState(null);
+    const [artist, setArtist] = useState<Artist>();
     const session = useSession();
 
     const getArtistData = async (id: string) => {
-        const token = session?.data?.accessToken;
-        const artistData = await fetch((`https://api.spotify.com/v1/artists/${id}`), {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }});
-                
-        const data = await artistData.json();
+        const artistData = await getArtistDataAPI(id);
 
-        if (!data.error) {
-            setArtist(data);
+        if (!artistData.error) {
+            setArtist(artistData);
         } else {
-            console.error(data.error);
-            if (data.error.status === 401) {
+            console.error(artistData.error);
+            if (artistData.error.status === 401) {
                 signIn('spotify');
             }
         }
@@ -179,7 +171,7 @@ const Album = ({album}: {album: any}) => {
                     >
                         {album.artists[0].name}
                 </Link>
-                <span className={styles.followers}>Followers: {artist?.followers.total}</span>
+                <span className={styles.followers}>Followers: {artist?.followers?.total}</span>
             </div>
         </div>
     )
