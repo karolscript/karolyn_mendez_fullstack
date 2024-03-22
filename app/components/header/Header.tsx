@@ -15,9 +15,6 @@ const Header = () => {
     const [online, setOnline] = useState(typeof window !== 'undefined' ? navigator.onLine : false);
     const [activePath, setActivePath] = useState(typeof window !== 'undefined' ? window.location.pathname : "");
 
-    //check locaion with the window prop and update the classnames
-
-
     const handleSignOut = () => {
       signOut({ callbackUrl: '/' });
     }

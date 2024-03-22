@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import { Album, CustomSession } from "../../../app/types/types";
+import { CustomSession } from "../../../app/types/types";
 
 export const getAlbumsAPI = async (
     artist: string,
